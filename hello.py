@@ -47,7 +47,6 @@ class signUpForm(Form):
     
     username = TextField('Pick a username', validators=[Required()])
     
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
 	username = None
@@ -60,6 +59,8 @@ def index():
 
  	return render_template('index.html', form=form, username=session.get('username'), 
  		password=session.get('password'), email=session.get('email'))
+
+
 
 
 if __name__ == '__main__':
