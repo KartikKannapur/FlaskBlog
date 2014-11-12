@@ -11,6 +11,7 @@ from wtforms.validators import Required
 
 
 app = Flask(__name__)
+app.config['CSRF_ENABLED'] = True
 app.config['SECRET_KEY'] = 'MyPersonalBlogKartikKannapur'
 
 
@@ -37,7 +38,7 @@ class signUpForm(Form):
 def index():
 	name = None
  	form = signUpForm()
- 	
+
  	if form.validate_on_submit():
  		name = form.name.data
  		form.name.data = ''
