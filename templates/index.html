@@ -16,7 +16,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
   </head>
   <body>
 
@@ -41,61 +41,66 @@
   	</div>
 
   	<div class="container">
-          <div class="row  pad-top">
+  		<div class="row  pad-top">
 
-            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <center><strong>Sign up!</strong></center> 
-                </div>
+  			<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+  				<div class="panel panel-default">
+  					<div class="panel-heading">
+  						<center><strong>Sign up!</strong></center> 
+  					</div>
 
-                <div class="panel-body">
+  					<div class="panel-body">
 
-                  <form role="form" action="/" class="form" method="POST">
+  						<form role="form" action="{{url_for('index')}}" class="form" method="POST">
+  							{{ form.hidden_tag() }}
 
-                    <br/>
-                    <div class="form-group input-group">
-                      <span class="input-group-addon"><i class="fa fa-circle-o-notch"  ></i></span>
-                      <label type="text" class="form-control" placeholder="Your Name">{{ form.name.label }} {{ form.name() }}</label>
-                    </div>
+  							<div class="form-group {% if form.email.errors %} has-error {% endif %}">
+  								{{form.email.label()}}
+  								<div class="">
+  									{{ form.email(placeholder="example@example.com", class="form-control") }} 
+  								</div>
 
-                    <div class="form-group input-group">
-                      <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
-                      <input type="text" class="form-control" placeholder="Desired Username" />
-                    </div>
+  								<p class="">{{ form.email.errors[0] }}
 
-                    <div class="form-group input-group">
-                      <span class="input-group-addon">@</span>
-                      <input type="text" class="form-control" placeholder="Your Email" />
-                    </div>
-
-                    <div class="form-group input-group">
-                      <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                      <input type="password" class="form-control" placeholder="Enter Password" />
-                    </div>
-
-                    <div class="form-group input-group">
-                      <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
-                      <input type="password" class="form-control" placeholder="Retype Password" />
-                    </div>
-
-                    <a href="#" class="btn btn-success ">Register Me</a>
-                    <hr />
-                    Already Registered ?  <a href="#" >Login here</a>
-                  </form>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
+  								</div>
 
 
+  								<div class="form-group {% if form.password.errors %} has-error {% endif %}">
+  									{{form.password.label()}}
+  									<div >{{ form.password(placeholder="Min. 6 Characters", class="form-control") }}
+  									</div>
 
-  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  	<!-- Include all compiled plugins (below), or include individual files as needed -->
-  	<script src="../static/bootstrap.min.js"></script>
-  </body>
-  </html>
+  									<p>{{ form.password.errors[0] }}
+
+  									</div>
+
+  									<div class="form-group {% if form.username.errors %} has-error {% endif %}">{{form.username.label()}}
+
+  										<div>{{form.username(placeholder="UsernameBlogger", class="form-control")}}
+  										</div>
+
+  										<p>{{ form.username.errors[0] }}
+
+  										</div>
+
+
+  										<button class="btn btn-success" type="submit">Sign Up</button>
+
+
+  									</form>
+
+  								</div>
+
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+
+
+
+  				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  				<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  				<!-- Include all compiled plugins (below), or include individual files as needed -->
+  				<script src="../static/bootstrap.min.js"></script>
+  			</body>
+  			</html>
