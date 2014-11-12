@@ -3,7 +3,7 @@
 ###################
 
 
-from flask import  Flask, session, redirect, url_for
+from flask import  Flask, session, redirect, url_for, flash
 from flask import render_template
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
@@ -22,9 +22,9 @@ app.config['SECRET_KEY'] = 'MyPersonalBlogKartikKannapur'
 
 
 
-@app.route('/user/<name>')
-def user(name):
-    return render_template('user.html',name=name)
+@app.route('/user/<username>')
+def user(username):
+    return render_template('user.html',username=username)
     
 @app.errorhandler(404)
 def page_not_found(e):
@@ -41,11 +41,11 @@ class signUpForm(Form):
         Length(min=6, message=(u'Email address too short')),
         Email(message=(u'That\'s not a valid email address.'))])
     
-    password = PasswordField('Pick a secure password', validators=[
+    password = PasswordField('Enter your password', validators=[
     	Required(),
         Length(min=6, message=(u'Please give a longer password'))])
     
-    username = TextField('Choose your username', validators=[Required()])
+    username = TextField('Pick a username', validators=[Required()])
     
 
 @app.route('/', methods=['GET', 'POST'])
@@ -54,9 +54,13 @@ def index():
  	form = signUpForm()
  	if form.validate_on_submit():
  		session['username'] = form.username.data
- 		return redirect(url_for('index'))
+ 		session['password'] = form.password.data
+ 		session['email'] = form.email.data
+ 		return redirect(url_for('user',username=form.username.data))
 
- 	return render_template('index.html', form=form, name=session.get('username'))
+ 	return render_template('index.html', form=form, username=session.get('username'), 
+ 		password=session.get('password'), email=session.get('email'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
