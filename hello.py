@@ -11,14 +11,18 @@ from wtforms import TextField, PasswordField, validators, HiddenField
 from wtforms import TextAreaField, BooleanField
 from wtforms.validators import Required, EqualTo, Optional
 from wtforms.validators import Length, Email
+from flask.ext.sqlalchemy import sqlalchemy
+import os
 
-
-
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.config['CSRF_ENABLED'] = True
 app.config['SECRET_KEY'] = 'MyPersonalBlogKartikKannapur'
 
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    'sqlite:///' + os.path.join(basedir,'data.sqlite')
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 
 
@@ -59,8 +63,6 @@ def index():
 
  	return render_template('index.html', form=form, username=session.get('username'), 
  		password=session.get('password'), email=session.get('email'))
-
-
 
 
 if __name__ == '__main__':
